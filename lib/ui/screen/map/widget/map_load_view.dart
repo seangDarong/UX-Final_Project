@@ -72,8 +72,10 @@ class _MapLoadedViewState extends State<MapLoadView> {
             children: [
               TileLayer(
                 urlTemplate:
-                    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+                subdomains: ['a', 'b', 'c', 'd'],
                 userAgentPackageName: 'com.ux_final_project',
+                retinaMode: true,
               ),
 
               MapMarkerLayer(
@@ -111,10 +113,7 @@ class _BookingPlaceholderScreen extends StatelessWidget {
         child: Text(
           'Booking screen — coming soon\n(teammate\'s work)',
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.grey.shade600,
-          ),
+          style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
         ),
       ),
     );
