@@ -1,13 +1,13 @@
-enum BikeStationStatus { available, empty }
+enum StationStatus { available, empty }
 
-class BikeStation {
+class Station {
   final String id;
   final String name;
   final double latitude;
   final double longitude;
   final int availableBikes;
 
-  BikeStation({
+  Station({
     required this.id,
     required this.name,
     required this.latitude,
@@ -16,9 +16,9 @@ class BikeStation {
 
   });
 
-  BikeStationStatus get status => availableBikes > 0
-      ? BikeStationStatus.available
-      : BikeStationStatus.empty;
+  StationStatus get status => availableBikes > 0
+      ? StationStatus.available
+      : StationStatus.empty;
 
   bool get hasAvailableBikes => availableBikes > 0;
 

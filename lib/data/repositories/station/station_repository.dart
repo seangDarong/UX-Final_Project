@@ -1,7 +1,7 @@
 import 'package:ux_final_project/models/station/station_model.dart';
 
-abstract class BikeStationRepository {
-  Future<List<BikeStation>> fetchStations();
+abstract class StationRepository {
+  Future<List<Station>> fetchStations();
 
-  Future<BikeStation?> fetchStationById(String id);
+  Future<Station?> fetchStationById(String id);
 }

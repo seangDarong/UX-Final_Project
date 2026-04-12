@@ -1,44 +1,44 @@
 import 'package:ux_final_project/data/repositories/station/station_repository.dart';
 import 'package:ux_final_project/models/station/station_model.dart';
 
-class BikeStationRepositoryMock implements BikeStationRepository {
-  static final List<BikeStation> _mockData = [
-    BikeStation(
+class BikeStationRepositoryMock implements StationRepository {
+  static final List<Station> _mockData = [
+    Station(
       id: 'stn_1',
       name: 'Central Market Station',
       latitude: 11.5664,
       longitude: 104.9282,
       availableBikes: 5,
     ),
-    BikeStation(
+    Station(
       id: 'stn_2',
       name: 'Royal Palace Station',
       latitude: 11.5626,
       longitude: 104.9309,
       availableBikes: 0,
     ),
-    BikeStation(
+    Station(
       id: 'stn_3',
       name: 'Riverside Park Station',
       latitude: 11.5694,
       longitude: 104.9305,
       availableBikes: 3,
     ),
-    BikeStation(
+    Station(
       id: 'stn_4',
       name: 'Toul Tom Poung Station',
       latitude: 11.5461,
       longitude: 104.9175,
       availableBikes: 0,
     ),
-    BikeStation(
+    Station(
       id: 'stn_5',
       name: 'BKK1 Station',
       latitude: 11.5537,
       longitude: 104.9262,
       availableBikes: 7,
     ),
-    BikeStation(
+    Station(
       id: 'stn_6',
       name: 'Olympic Stadium Station',
       latitude: 11.5573,
@@ -48,13 +48,13 @@ class BikeStationRepositoryMock implements BikeStationRepository {
   ];
 
   @override
-  Future<List<BikeStation>> fetchStations() async {
+  Future<List<Station>> fetchStations() async {
     await Future.delayed(const Duration(milliseconds: 500));
     return _mockData;
   }
 
   @override
-  Future<BikeStation?> fetchStationById(String id) async {
+  Future<Station?> fetchStationById(String id) async {
     await Future.delayed(const Duration(milliseconds: 300));
 
     return _mockData.firstWhere(
