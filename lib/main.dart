@@ -9,7 +9,7 @@ import 'data/repositories/station/station_repository_mock.dart';
 List<InheritedProvider> get devProviders {
   return [
     Provider<PassRepository>(create: (_) => MockPassRepository()),
-    Provider<StationRepository>(create: (_) => BikeStationRepositoryMock()),
+    Provider<StationRepository>(create: (_) => StationRepositoryMock()),
   ];
 }
 

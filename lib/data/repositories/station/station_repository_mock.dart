@@ -1,7 +1,7 @@
 import 'package:ux_final_project/data/repositories/station/station_repository.dart';
 import 'package:ux_final_project/models/station/station_model.dart';
 
-class BikeStationRepositoryMock implements StationRepository {
+class StationRepositoryMock implements StationRepository {
   static final List<Station> _mockData = [
     Station(
       id: 'stn_1',
