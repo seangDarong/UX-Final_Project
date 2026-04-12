@@ -7,7 +7,7 @@ import '../../../utils/async_value.dart';
 class MapViewModel extends ChangeNotifier {
   final StationRepository stationRepository;
 
-  AsyncValue<List<Station>> stationsValue = AsyncValue.loading();
+  AsyncValue<List<Station>> data = AsyncValue.loading();
   Station? selectedStation;
 
   MapViewModel({required this.stationRepository}) {
@@ -18,18 +18,18 @@ class MapViewModel extends ChangeNotifier {
     fetchStations();
   }
 
-  void fetchStations({bool forceFetch = false}) async {
+  void fetchStations() async {
     // 1 - Loading state
-    stationsValue = AsyncValue.loading();
+    data = AsyncValue.loading();
     notifyListeners();
 
     try {
       // 2 - Fetch is successful
       final List<Station> stations = await stationRepository.fetchStations();
-      stationsValue = AsyncValue.success(stations);
+      data = AsyncValue.success(stations);
     } catch (e) {
       // 3 - Fetch is unsuccessful
-      stationsValue = AsyncValue.error(e);
+      data = AsyncValue.error(e);
     }
     notifyListeners();
   }
