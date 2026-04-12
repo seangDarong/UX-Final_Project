@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:ux_final_project/ui/screen/profile/profile_screen.dart';
 import 'ui/screen/map/map_screen.dart';
@@ -44,6 +45,9 @@ class _MyAppState extends State<MyApp> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
+          if (_currentIndex == index) return;
+
+          HapticFeedback.selectionClick();
           setState(() {
             _currentIndex = index;
           });
