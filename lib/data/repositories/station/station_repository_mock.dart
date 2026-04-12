@@ -9,7 +9,6 @@ class BikeStationRepositoryMock implements BikeStationRepository {
       latitude: 11.5664,
       longitude: 104.9282,
       availableBikes: 5,
-      totalDocks: 10,
     ),
     BikeStation(
       id: 'stn_2',
@@ -17,7 +16,6 @@ class BikeStationRepositoryMock implements BikeStationRepository {
       latitude: 11.5626,
       longitude: 104.9309,
       availableBikes: 0,
-      totalDocks: 8,
     ),
     BikeStation(
       id: 'stn_3',
@@ -25,7 +23,6 @@ class BikeStationRepositoryMock implements BikeStationRepository {
       latitude: 11.5694,
       longitude: 104.9305,
       availableBikes: 3,
-      totalDocks: 12,
     ),
     BikeStation(
       id: 'stn_4',
@@ -33,7 +30,6 @@ class BikeStationRepositoryMock implements BikeStationRepository {
       latitude: 11.5461,
       longitude: 104.9175,
       availableBikes: 0,
-      totalDocks: 6,
     ),
     BikeStation(
       id: 'stn_5',
@@ -41,7 +37,6 @@ class BikeStationRepositoryMock implements BikeStationRepository {
       latitude: 11.5537,
       longitude: 104.9262,
       availableBikes: 7,
-      totalDocks: 10,
     ),
     BikeStation(
       id: 'stn_6',
@@ -49,7 +44,6 @@ class BikeStationRepositoryMock implements BikeStationRepository {
       latitude: 11.5573,
       longitude: 104.9155,
       availableBikes: 2,
-      totalDocks: 8,
     ),
   ];
 

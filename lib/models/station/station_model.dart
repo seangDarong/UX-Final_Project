@@ -6,7 +6,6 @@ class BikeStation {
   final double latitude;
   final double longitude;
   final int availableBikes;
-  final int totalDocks;
 
   BikeStation({
     required this.id,
@@ -14,7 +13,7 @@ class BikeStation {
     required this.latitude,
     required this.longitude,
     required this.availableBikes,
-    required this.totalDocks,
+
   });
 
   BikeStationStatus get status => availableBikes > 0
@@ -26,6 +25,6 @@ class BikeStation {
   @override
   String toString() {
     return 'BikeStation(id: $id, name: $name, lat: $latitude, lon: $longitude, '
-        'availableBikes: $availableBikes, totalDocks: $totalDocks)';
+        'availableBikes: $availableBikes)';
   }
 }
