@@ -43,3 +43,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Local CocoaPods artifacts (iOS/macOS)
+/ios/Podfile
+/ios/Podfile.lock
+/ios/Pods/
+/macos/Podfile
+/macos/Pods/
