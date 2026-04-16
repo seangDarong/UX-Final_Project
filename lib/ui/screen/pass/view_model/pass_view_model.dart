@@ -12,6 +12,8 @@ class PassViewModel extends ChangeNotifier {
     _init();
   }
 
+  bool get hasActivePass => passValue.data != null;
+
   void _init() {
     fetchActivePass();
   }
