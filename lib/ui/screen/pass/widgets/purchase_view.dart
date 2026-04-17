@@ -8,30 +8,30 @@ class PurchaseView extends StatelessWidget {
   final PassType selectedPass;
   final ValueChanged<PassType> onSelectedPassChanged;
   final VoidCallback onConfirm;
-  const PurchaseView ({
+  const PurchaseView({
     required this.plans,
     required this.selectedPass,
     required this.onSelectedPassChanged,
-    required this.onConfirm
-    });
-    
+    required this.onConfirm,
+  });
+
   @override
   Widget build(BuildContext context) {
     final List<Widget> planWidgets = [];
 
-    for (var i = 0; i < plans.length; i++){
+    for (var i = 0; i < plans.length; i++) {
       final plan = plans[i];
 
       planWidgets.add(
-        PassCard(title: plan.title,
-        price: plan.price,
-        subtitle: plan.validityLabel,
-        selected: selectedPass == plan.type,
-        onTap: () => 
-          onSelectedPassChanged(plan.type)
-        )
+        PassCard(
+          title: plan.title,
+          price: plan.price,
+          subtitle: plan.validityLabel,
+          selected: selectedPass == plan.type,
+          onTap: () => onSelectedPassChanged(plan.type),
+        ),
       );
-      if ( i != plans.length - 1){
+      if (i != plans.length - 1) {
         planWidgets.add(const SizedBox(height: 12));
       }
     }
@@ -41,7 +41,10 @@ class PurchaseView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const SizedBox(height: 28),
-          const Text("Choose a pass", style:  TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+          const Text(
+            "Choose a pass",
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
           const SizedBox(height: 12),
           ...planWidgets,
           const SizedBox(height: 24),
@@ -55,7 +58,7 @@ class PurchaseView extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(14),
-              border: Border.all(color: const Color(0xFFE4E4E4)),
+              border: Border.all(color: Colors.grey.shade300),
             ),
             child: Row(
               children: [
@@ -64,7 +67,7 @@ class PurchaseView extends StatelessWidget {
                   height: 22,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFF2F2F2),
+                    color: Colors.grey.shade200,
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: const Text(
@@ -73,7 +76,7 @@ class PurchaseView extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 12),
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -84,10 +87,10 @@ class PurchaseView extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      SizedBox(height: 2),
+                      const SizedBox(height: 2),
                       Text(
                         '.... 1234',
-                        style: TextStyle(color: Colors.black54),
+                        style: const TextStyle(color: Colors.black54),
                       ),
                     ],
                   ),
@@ -102,8 +105,6 @@ class PurchaseView extends StatelessWidget {
             child: ElevatedButton(
               onPressed: onConfirm,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFF04F4A),
-                foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14),
                 ),

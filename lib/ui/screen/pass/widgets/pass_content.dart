@@ -7,7 +7,6 @@ import 'package:ux_final_project/ui/screen/pass/widgets/error_state.dart';
 import 'package:ux_final_project/ui/screen/pass/widgets/purchase_view.dart';
 import 'package:ux_final_project/ui/utils/async_value.dart';
 
-
 class PassContent extends StatefulWidget {
   const PassContent({super.key});
 
@@ -34,7 +33,6 @@ class _PassContentState extends State<PassContent> {
     final plans = viewModel.passPlans;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F0E1),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),

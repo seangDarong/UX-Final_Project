@@ -18,10 +18,8 @@ class PassCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderColor = selected
-        ? const Color(0xFF76A9FF)
-        : const Color(0xFFE5E5E5);
-    final backgroundColor = selected ? const Color(0xFFF9FCFF) : Colors.white;
+    final borderColor = selected ? Colors.blue : Colors.grey.shade300;
+    final backgroundColor = Colors.white;
 
     return InkWell(
       onTap: onTap,
@@ -73,7 +71,7 @@ class PassCard extends StatelessWidget {
                   const SizedBox(height: 4),
                   Text(
                     subtitle,
-                    style: const TextStyle(fontSize: 13, color: Colors.black45),
+                    style: const TextStyle(fontSize: 13, color: Colors.black54),
                   ),
                 ],
               ),
@@ -98,7 +96,7 @@ class _SelectionCircle extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(
-          color: selected ? const Color(0xFF76A9FF) : const Color(0xFFCCCCCC),
+          color: selected ? Colors.blue : Colors.grey,
           width: 1.4,
         ),
       ),
@@ -107,10 +105,7 @@ class _SelectionCircle extends StatelessWidget {
           duration: const Duration(milliseconds: 180),
           width: selected ? 10 : 0,
           height: selected ? 10 : 0,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            color: Color(0xFF76A9FF),
-          ),
+          decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
         ),
       ),
     );

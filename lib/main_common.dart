@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:ux_final_project/ui/screen/profile/profile_screen.dart';
 import 'ui/screen/map/map_screen.dart';
 import 'ui/screen/pass/pass_screen.dart';
 import 'ui/theme/theme.dart';

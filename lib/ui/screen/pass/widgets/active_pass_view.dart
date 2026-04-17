@@ -9,7 +9,7 @@ class ActivePassView extends StatelessWidget {
   const ActivePassView({
     required this.pass,
     required this.onCancel,
-    required this.passLabel
+    required this.passLabel,
   });
 
   @override
@@ -21,24 +21,36 @@ class ActivePassView extends StatelessWidget {
         children: [
           const SizedBox(height: 24),
           const Center(
-            child: Text("Current Pass", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+            child: Text(
+              "Current Pass",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
           ),
-          const SizedBox(height: 12,),
+          const SizedBox(height: 12),
           Container(
-            padding: EdgeInsets.all(14),
+            padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(14)
+              borderRadius: BorderRadius.circular(14),
+              border: Border.all(color: Colors.grey.shade300),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x11000000),
+                  blurRadius: 10,
+                  offset: Offset(0, 3),
+                ),
+              ],
             ),
             child: Row(
               children: [
                 Container(
                   width: 34,
                   height: 34,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF2F9E44),
+                  decoration: BoxDecoration(
+                    color: Colors.green,
                     shape: BoxShape.circle,
-                  ),child: const Icon(
+                  ),
+                  child: const Icon(
                     Icons.directions_bike,
                     color: Colors.white,
                     size: 18,
@@ -54,12 +66,22 @@ class ActivePassView extends StatelessWidget {
                         style: const TextStyle(fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(height: 4),
-                      LinearProgressIndicator(
-                        value: 0.72,
-                        backgroundColor: const Color(0xFFE9ECEF),
-                        color: const Color(0xFF2F9E44),
-                        minHeight: 6,
-                        borderRadius: BorderRadius.circular(99),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(99),
+                          border: Border.all(color: Colors.grey.shade300),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(99),
+                          child: SizedBox(
+                            height: 8,
+                            child: LinearProgressIndicator(
+                              value: 0.72,
+                              backgroundColor: Colors.grey.shade200,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -76,7 +98,7 @@ class ActivePassView extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: const Color(0xFFF1D9A8),
+              color: Colors.amber.shade200,
               borderRadius: BorderRadius.circular(14),
             ),
             child: const Text(
@@ -90,8 +112,6 @@ class ActivePassView extends StatelessWidget {
             child: ElevatedButton(
               onPressed: onCancel,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFF04F4A),
-                foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(14),
                 ),
