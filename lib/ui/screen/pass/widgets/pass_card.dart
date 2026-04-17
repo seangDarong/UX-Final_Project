@@ -20,6 +20,7 @@ class PassCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final borderColor = selected ? Colors.blue : Colors.grey.shade300;
     final backgroundColor = Colors.white;
+    final displayPrice = price.contains(r'$') ? price : r'$' + price.trim();
 
     return InkWell(
       onTap: onTap,
@@ -60,7 +61,7 @@ class PassCard extends StatelessWidget {
                       Text('·', style: TextStyle(color: Colors.grey.shade500)),
                       const SizedBox(width: 6),
                       Text(
-                        price,
+                        displayPrice,
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
