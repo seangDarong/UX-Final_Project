@@ -1,6 +1,6 @@
 class BikeSlot {
-  final String? bikeId; // null if slot is empty
-  final String status; // e.g., "available", "empty", "maintenance"
+  final String? bikeId;
+  final String status;
 
   BikeSlot({
     required this.bikeId,

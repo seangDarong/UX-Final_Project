@@ -1,6 +1,6 @@
 class Bike {
   final String id;
-  final String status; // e.g., "available", "rented", "maintenance"
+  final String status;
   final String stationId;
   final String slotId;
 
