@@ -7,6 +7,7 @@ import 'package:ux_final_project/ui/screen/map/view_model/map_view_model.dart';
 import 'package:ux_final_project/ui/screen/map/widget/map_marker_layer.dart';
 import 'package:ux_final_project/ui/screen/map/widget/map_search_bar.dart';
 import 'package:ux_final_project/ui/screen/map/widget/map_search_view.dart';
+import 'package:ux_final_project/ui/screen/station_details/staion_details_screen.dart';
 
 /// Shown when stations have loaded successfully.
 class MapLoadView extends StatefulWidget {
@@ -35,7 +36,7 @@ class _MapLoadedViewState extends State<MapLoadView> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (_) => _BookingPlaceholderScreen(station: station),
+        builder: (_) => StationDetailsScreen(stationId: station.id),
       ),
     );
   }
@@ -100,22 +101,22 @@ class _MapLoadedViewState extends State<MapLoadView> {
 }
 
 /// Booking placeholder
-class _BookingPlaceholderScreen extends StatelessWidget {
-  final Station station;
+// class _BookingPlaceholderScreen extends StatelessWidget {
+//   final Station station;
 
-  const _BookingPlaceholderScreen({required this.station});
+//   const _BookingPlaceholderScreen({required this.station});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(station.name)),
-      body: Center(
-        child: Text(
-          'Booking screen — coming soon\n(teammate\'s work)',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text(station.name)),
+//       body: Center(
+//         child: Text(
+//           'Booking screen — coming soon\n(teammate\'s work)',
+//           textAlign: TextAlign.center,
+//           style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
+//         ),
+//       ),
+//     );
+//   }
+// }
