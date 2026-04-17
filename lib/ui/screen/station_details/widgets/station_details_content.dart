@@ -146,7 +146,7 @@ class _StationDetailsSlotsList extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.two_wheeler, size: 24),
+                      const Icon(Icons.directions_bike_rounded, size: 24),
                       const SizedBox(height: 4),
                       Text(slot.bikeId ?? 'Unknown', style: const TextStyle(fontSize: 10, color: Colors.grey)),
                     ],
