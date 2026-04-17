@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ux_final_project/models/pass_model.dart';
+import 'package:ux_final_project/models/pass/pass_model.dart';
 import 'package:ux_final_project/ui/screen/pass/view_model/pass_view_model.dart';
 import 'package:ux_final_project/ui/screen/pass/widgets/active_pass_view.dart';
 import 'package:ux_final_project/ui/screen/pass/widgets/error_state.dart';

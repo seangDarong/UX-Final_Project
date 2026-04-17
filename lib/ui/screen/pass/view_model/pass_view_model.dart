@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ux_final_project/data/repositories/pass/pass_repository.dart';
-import 'package:ux_final_project/models/pass_model.dart';
-import 'package:ux_final_project/models/pass_plan_model.dart';
+import 'package:ux_final_project/models/pass/pass_model.dart';
+import 'package:ux_final_project/models/pass/pass_plan_model.dart';
 import '../../../utils/async_value.dart';
 
 class PassViewModel extends ChangeNotifier {

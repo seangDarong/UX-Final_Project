@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ux_final_project/models/pass_model.dart';
+import 'package:ux_final_project/models/pass/pass_model.dart';
 
 class ActivePassView extends StatelessWidget {
   final Pass pass;
