@@ -76,7 +76,10 @@ class _MapSearchScreenState extends State<MapSearchView> {
               itemCount: results.length,
               itemBuilder: (context, index) {
                 final station = results[index];
-                return StationListTile(station: station, onTap: () {});
+                return StationListTile(
+                  station: station,
+                  onTap: () => widget.onStationSelected(station),
+                );
               },
             ),
     );

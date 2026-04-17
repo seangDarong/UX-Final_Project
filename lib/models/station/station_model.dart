@@ -10,15 +10,21 @@ class Station {
   final int capacity;
   final Map<String, BikeSlot> slots;
 
-  Station({required this.id, required this.name, required this.latitude, required this.longitude, required this.capacity, required this.slots});
+  Station({
+    required this.id,
+    required this.name,
+    required this.latitude,
+    required this.longitude,
+    required this.capacity,
+    required this.slots,
+  });
 
   int get availableBikes {
     return slots.values.where((slot) => slot.status == 'available').length;
   }
 
-  StationStatus get status => availableBikes > 0
-      ? StationStatus.available
-      : StationStatus.empty;
+  StationStatus get status =>
+      availableBikes > 0 ? StationStatus.available : StationStatus.empty;
 
   bool get hasAvailableBikes => availableBikes > 0;
 
