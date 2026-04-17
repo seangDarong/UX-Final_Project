@@ -1,8 +1,35 @@
 import 'package:ux_final_project/models/pass_model.dart';
+import 'package:ux_final_project/models/pass_plan_model.dart';
 import 'pass_repository.dart';
 
 class MockPassRepository implements PassRepository {
   Pass? _pass;
+  static const List<PassPlan> _plans = [
+    PassPlan(
+      type: PassType.day,
+      title: 'Day pass',
+      price: '3\$',
+      validityLabel: 'Valid for 24 hours',
+    ),
+    PassPlan(
+      type: PassType.monthly,
+      title: 'Monthly pass',
+      price: '15\$',
+      validityLabel: 'Valid for 30 days',
+    ),
+    PassPlan(
+      type: PassType.annual,
+      title: 'Yearly pass',
+      price: '99\$',
+      validityLabel: 'Valid for 365 days',
+    ),
+  ];
+
+  @override
+  Future<List<PassPlan>> fetchPassPlans() async {
+    await Future.delayed(const Duration(milliseconds: 200));
+    return _plans;
+  }
 
   static Duration _durationFor(PassType type) {
     switch (type) {
@@ -37,5 +64,4 @@ class MockPassRepository implements PassRepository {
     await Future.delayed(const Duration(milliseconds: 300));
     _pass = null;
   }
-  
 }

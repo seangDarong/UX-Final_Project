@@ -10,48 +10,36 @@ import 'package:ux_final_project/ui/screen/map/widget/map_search_view.dart';
 import 'package:ux_final_project/ui/screen/station_details/staion_details_screen.dart';
 
 /// Shown when stations have loaded successfully.
-class MapLoadView extends StatefulWidget {
+class MapSuccessView extends StatelessWidget {
   final List<Station> stations;
   final Station? selectedStation;
 
-  const MapLoadView({
+  const MapSuccessView({
     super.key,
     required this.stations,
     required this.selectedStation,
   });
 
-  @override
-  State<MapLoadView> createState() => _MapLoadedViewState();
-}
-
-class _MapLoadedViewState extends State<MapLoadView> {
   static const LatLng _initialCenter = LatLng(11.5564, 104.9282);
   static const double _initialZoom = 14.0;
 
-  void _onMarkerTapped(Station station) {
-    // Select station in ViewModel
-    context.read<MapViewModel>().selectStation(station);
-
-    // Navigate to booking (placeholder)
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => StationDetailsScreen(stationId: station.id),
-      ),
-    );
-  }
-
-  void _onStationSelectedFromSearch(Station station) {
-    context.read<MapViewModel>().selectStation(station);
-  }
-
-  void _openSearch() {
+void _onStationSelected(BuildContext context, Station station) {
+  context.read<MapViewModel>().selectStation(station);
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (_) => StationDetailsScreen(stationId: station.id),
+    ),
+  );
+}
+  void _openSearch(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (_) => MapSearchView(
-          stations: widget.stations,
-          onStationSelected: _onStationSelectedFromSearch,
+          stations: stations,
+          onStationSelected: (station) =>
+              _onStationSelected(context, station),
         ),
       ),
     );
@@ -62,7 +50,6 @@ class _MapLoadedViewState extends State<MapLoadView> {
     return Scaffold(
       body: Stack(
         children: [
-          /// Flutter Map
           FlutterMap(
             options: const MapOptions(
               initialCenter: _initialCenter,
@@ -78,20 +65,17 @@ class _MapLoadedViewState extends State<MapLoadView> {
                 userAgentPackageName: 'com.ux_final_project',
                 retinaMode: true,
               ),
-
               MapMarkerLayer(
-                stations: widget.stations,
-                selectedStation: widget.selectedStation,
-                onMarkerTapped: _onMarkerTapped,
+                stations: stations,
+                selectedStation: selectedStation,
+                onMarkerTapped: (station) => _onStationSelected(context, station),
               ),
             ],
           ),
-
-          /// Search bar overlay
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-              child: MapSearchBar(onTap: _openSearch),
+              child: MapSearchBar(onTap: () => _openSearch(context)),
             ),
           ),
         ],
@@ -99,24 +83,3 @@ class _MapLoadedViewState extends State<MapLoadView> {
     );
   }
 }
-
-/// Booking placeholder
-// class _BookingPlaceholderScreen extends StatelessWidget {
-//   final Station station;
-
-//   const _BookingPlaceholderScreen({required this.station});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text(station.name)),
-//       body: Center(
-//         child: Text(
-//           'Booking screen — coming soon\n(teammate\'s work)',
-//           textAlign: TextAlign.center,
-//           style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
-//         ),
-//       ),
-//     );
-//   }
-// }
