@@ -1,5 +1,6 @@
 enum PassType { day, monthly, annual }
 
+
 class Pass {
   final PassType type;
   final DateTime startDate;
