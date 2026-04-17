@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ux_final_project/ui/screen/map/view_model/map_view_model.dart';
 import 'package:ux_final_project/ui/screen/map/widget/map_error_view.dart';
-import 'package:ux_final_project/ui/screen/map/widget/map_load_view.dart';
+import 'package:ux_final_project/ui/screen/map/widget/map_success_view.dart';
 import 'package:ux_final_project/ui/utils/async_value.dart';
 
 /// Entry widget for the map screen body.
@@ -21,7 +21,7 @@ class MapContent extends StatelessWidget {
           error: vm.data.error,
           onRetry: () => context.read<MapViewModel>().fetchStations(),
         ),
-      AsyncValueState.success => MapLoadView(
+      AsyncValueState.success => MapSuccessView(
           stations: vm.data.data!,
           selectedStation: vm.selectedStation,
         ),
