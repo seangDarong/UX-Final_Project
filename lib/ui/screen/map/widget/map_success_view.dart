@@ -7,6 +7,7 @@ import 'package:ux_final_project/ui/screen/map/view_model/map_view_model.dart';
 import 'package:ux_final_project/ui/screen/map/widget/map_marker_layer.dart';
 import 'package:ux_final_project/ui/screen/map/widget/map_search_bar.dart';
 import 'package:ux_final_project/ui/screen/map/widget/map_search_view.dart';
+import 'package:ux_final_project/ui/screen/station_details/staion_details_screen.dart';
 
 /// Shown when stations have loaded successfully.
 class MapSuccessView extends StatelessWidget {
@@ -27,7 +28,7 @@ void _onStationSelected(BuildContext context, Station station) {
   Navigator.push(
     context,
     MaterialPageRoute(
-      builder: (_) => const Placeholder(),
+      builder: (_) => StationDetailsScreen(stationId: station.id),
     ),
   );
 }
