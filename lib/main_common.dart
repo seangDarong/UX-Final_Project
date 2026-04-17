@@ -33,7 +33,6 @@ class _MyAppState extends State<MyApp> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = const [
-    ProfileScreen(),
     MapScreen(),
     PassScreen(),
   ];
@@ -53,10 +52,6 @@ class _MyAppState extends State<MyApp> {
           });
         },
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'My profile',
-          ),
           BottomNavigationBarItem(icon: Icon(Icons.map_outlined), label: 'Map'),
           BottomNavigationBarItem(
             icon: Icon(Icons.star_outline),
