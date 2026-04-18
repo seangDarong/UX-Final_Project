@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ux_final_project/models/station/station_model.dart';
+import 'package:ux_final_project/models/bike/bike_model.dart';
 import 'package:ux_final_project/ui/utils/async_value.dart';
 import 'package:ux_final_project/ui/screen/station_details/view_model/station_details_view_model.dart';
+import 'package:ux_final_project/ui/screen/booking/booking_screen.dart';
 
 class StationDetailsContent extends StatelessWidget {
   const StationDetailsContent({super.key});
@@ -105,6 +107,7 @@ class _StationDetailsSlotsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final availableSlots = viewModel.getAvailableSlots();
+    final stationId = viewModel.data.data?.id ?? '';
 
     if (availableSlots.isEmpty) {
       return const Center(
@@ -118,56 +121,103 @@ class _StationDetailsSlotsList extends StatelessWidget {
         final slotId = entry.key;
         final slot = entry.value;
 
+        final bike = Bike(
+          id: slot.bikeId ?? 'Unknown',
+          status: slot.status ?? 'available',
+          stationId: stationId,
+          slotId: slotId
+        );
+
         return Padding(
           padding: const EdgeInsets.only(bottom: 12),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black, width: 2),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text('Slot', style: TextStyle(fontSize: 10)),
-                          Text(slotId.replaceFirst('slot_', ''), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.directions_bike_rounded, size: 24),
-                      const SizedBox(height: 4),
-                      Text(slot.bikeId ?? 'Unknown', style: const TextStyle(fontSize: 10, color: Colors.grey)),
-                    ],
-                  ),
-                ],
+          child: Dismissible(
+            key: Key(slotId),
+            direction: DismissDirection.endToStart,
+            background: Container(
+              decoration: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(8)),
+              alignment: Alignment.centerRight,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: const Icon(Icons.arrow_back_ios, color: Colors.white),
+            ),
+            onDismissed: (direction) {
+              _navigateToBooking(context, bike, stationId);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade300),
+                borderRadius: BorderRadius.circular(8),
               ),
-              Row(
-                children: [
-                  Container(
-                    width: 12,
-                    height: 12,
-                    decoration: BoxDecoration(color: Colors.green, shape: BoxShape.circle),
+              child: Material(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                child: InkWell(
+                  onTap: () => _navigateToBooking(context, bike, stationId),
+                  borderRadius: BorderRadius.circular(8),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black, width: 2),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text('Slot', style: TextStyle(fontSize: 10)),
+                                    Text(slotId.replaceFirst('slot_', ''), style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 16),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(Icons.directions_bike_rounded, size: 24),
+                                const SizedBox(height: 4),
+                                Text(slot.bikeId ?? 'Unknown', style: const TextStyle(fontSize: 10, color: Colors.grey)),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: 12,
+                              height: 12,
+                              decoration: BoxDecoration(color: Colors.green, shape: BoxShape.circle),
+                            ),
+                            const SizedBox(width: 8),
+                            Text(slot.status ?? 'Unknown', style: const TextStyle(fontSize: 14)),
+                            const SizedBox(width: 12),
+                            Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey.shade400),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                  const SizedBox(width: 8),
-                  Text(slot.status ?? 'Unknown', style: const TextStyle(fontSize: 14)),
-                ],
+                ),
               ),
-            ],
+            ),
           ),
         );
       }).toList(),
+    );
+  }
+
+  void _navigateToBooking(BuildContext context, Bike bike, String stationId) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => BookingScreen(bike: bike, stationId: stationId),
+      ),
     );
   }
 }

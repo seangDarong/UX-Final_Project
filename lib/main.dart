@@ -4,6 +4,7 @@ import 'package:ux_final_project/data/repositories/bike/bike_repository_firebase
 import 'package:ux_final_project/data/repositories/pass/pass_repository_firebase.dart';
 import 'package:ux_final_project/data/repositories/station/station_repository_firebase.dart';
 import 'package:ux_final_project/ui/state/user_pass_state.dart';
+import 'package:ux_final_project/ui/state/booking_state.dart';
 import 'main_common.dart';
 import 'data/repositories/pass/pass_repository.dart';
 import 'data/repositories/station/station_repository.dart';
@@ -15,6 +16,7 @@ List<InheritedProvider> get devProviders {
     Provider<StationRepository>(create: (_) => StationRepositoryFirebase()),
     Provider<BikeRepository>(create: (_) => BikeRepositoryFirebase()),
     ChangeNotifierProvider<UserPassState>(create: (_) => UserPassState()),
+    ChangeNotifierProvider<BookingState>(create: (_) => BookingState()),
   ];
 }
 
