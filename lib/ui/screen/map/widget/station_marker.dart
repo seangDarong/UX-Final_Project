@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:ux_final_project/models/station/station_model.dart';
+import 'package:ux_final_project/ui/state/booking_state.dart';
 
 /// A custom marker widget for a station, showing availability and a bike icon.
 class StationMarker extends StatelessWidget {
   final Station station;
   final bool isSelected;
+  final BookingState bookingState;
 
-  const StationMarker({
-    super.key,
-    required this.station,
-    this.isSelected = false,
-  });
+  const StationMarker({super.key, required this.station, required this.bookingState, this.isSelected = false});
 
-  Color get _baseColor =>
-      station.hasAvailableBikes ? Colors.green : Colors.black;
+  int get _displayAvailableBikes {
+    int count = station.availableBikes;
+    if (bookingState.bookedBikeId != null && bookingState.bookedStationId == station.id) {
+      count--;
+    }
+    return count;
+  }
 
-  Color get _labelColor =>
-      station.hasAvailableBikes ? Colors.white : Colors.grey;
+  Color get _baseColor => _displayAvailableBikes > 0 ? Colors.green : Colors.black;
+
+  Color get _labelColor => _displayAvailableBikes > 0 ? Colors.white : Colors.grey;
 
   @override
   Widget build(BuildContext context) {
@@ -26,27 +30,15 @@ class StationMarker extends StatelessWidget {
         /// Badge
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-          decoration: BoxDecoration(
-            color: _baseColor,
-            borderRadius: BorderRadius.circular(20),
-          ),
+          decoration: BoxDecoration(color: _baseColor, borderRadius: BorderRadius.circular(20)),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                Icons.directions_bike_rounded,
-                size: 12,
-                color: _labelColor,
-              ),
+              Icon(Icons.directions_bike_rounded, size: 12, color: _labelColor),
               const SizedBox(width: 3),
               Text(
-                '${station.availableBikes}',
-                style: TextStyle(
-                  color: _labelColor,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
-                  height: 1,
-                ),
+                '$_displayAvailableBikes',
+                style: TextStyle(color: _labelColor, fontSize: 12, fontWeight: FontWeight.w700, height: 1),
               ),
             ],
           ),
@@ -84,6 +76,5 @@ class _PinTailPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_PinTailPainter oldDelegate) =>
-      oldDelegate.color != color;
+  bool shouldRepaint(_PinTailPainter oldDelegate) => oldDelegate.color != color;
 }
