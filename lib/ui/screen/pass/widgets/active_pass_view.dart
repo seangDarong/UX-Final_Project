@@ -14,8 +14,6 @@ class ActivePassView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final remaining = pass.expirationDate.difference(DateTime.now());
-
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -62,7 +60,7 @@ class ActivePassView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        _formatRemaining(pass.type, remaining),
+                        _formatExpiryDate(context, pass.expirationDate),
                         style: const TextStyle(fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(height: 4),
@@ -125,31 +123,10 @@ class ActivePassView extends StatelessWidget {
     );
   }
 
-  String _formatRemaining(PassType type, Duration remaining) {
-    if (remaining.isNegative) {
-      return 'Expired';
-    }
-
-    final totalDays = (remaining.inMinutes / Duration.minutesPerDay).ceil();
-
-    switch (type) {
-      case PassType.day:
-        final hours = remaining.inHours;
-        final minutes = remaining.inMinutes.remainder(60);
-        return '$hours h ${minutes.toString().padLeft(2, '0')}m remaining';
-      case PassType.monthly:
-        return '$totalDays day${totalDays == 1 ? '' : 's'} remaining';
-      case PassType.annual:
-        final months = totalDays ~/ 30;
-        final days = totalDays % 30;
-        if (months == 0) {
-          return '$days day${days == 1 ? '' : 's'} remaining';
-        }
-        if (days == 0) {
-          return '$months month${months == 1 ? '' : 's'} remaining';
-        }
-        return '$months month${months == 1 ? '' : 's'} '
-            '$days day${days == 1 ? '' : 's'} remaining';
-    }
+  String _formatExpiryDate(BuildContext context, DateTime expirationDate) {
+    final fullDate = MaterialLocalizations.of(
+      context,
+    ).formatFullDate(expirationDate.toLocal());
+    return 'Expires on $fullDate';
   }
 }
