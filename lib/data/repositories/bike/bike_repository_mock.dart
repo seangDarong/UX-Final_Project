@@ -50,17 +50,6 @@ class BikeRepositoryMock implements BikeRepository {
 
     return _mockData.firstWhereOrNull((bike) => bike.id == id);
   }
-
-  @override
-  Future<void> bookBike(String bikeId, String stationId) async {
-    await Future.delayed(const Duration(seconds: 1));
-
-    final bikeIndex = _mockData.indexWhere((bike) => bike.id == bikeId);
-    if (bikeIndex != -1) {
-      final bookedBike = _mockData[bikeIndex];
-      _mockData[bikeIndex] = Bike(id: bookedBike.id, status: 'booked', stationId: bookedBike.stationId, slotId: bookedBike.slotId);
-    }
-  }
 }
 
 extension FirstWhereOrNull<T> on List<T> {

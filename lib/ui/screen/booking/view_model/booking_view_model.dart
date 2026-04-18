@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ux_final_project/data/repositories/bike/bike_repository.dart';
 import 'package:ux_final_project/data/repositories/pass/pass_repository.dart';
 import 'package:ux_final_project/models/bike/bike_model.dart';
 import 'package:ux_final_project/models/pass/pass_model.dart';
@@ -8,7 +7,6 @@ import 'package:ux_final_project/ui/state/booking_state.dart';
 import 'package:ux_final_project/ui/utils/async_value.dart';
 
 class BookingViewModel extends ChangeNotifier {
-  final BikeRepository bikeRepository;
   final PassRepository passRepository;
   final UserPassState userPassState;
   final BookingState bookingState;
@@ -21,7 +19,6 @@ class BookingViewModel extends ChangeNotifier {
   bool _isBookingConfirmed = false;
 
   BookingViewModel({
-    required this.bikeRepository,
     required this.passRepository,
     required this.userPassState,
     required this.bookingState,
