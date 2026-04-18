@@ -6,9 +6,7 @@ import 'package:ux_final_project/dtos/bike_dto.dart';
 import 'package:ux_final_project/models/bike/bike_model.dart';
 
 class BikeRepositoryFirebase implements BikeRepository {
-  final Uri bikesUri = FirebaseConfig.baseUri.replace(
-    path: '/bikes.json',
-  );
+  final Uri bikesUri = FirebaseConfig.baseUri.replace(path: '/bikes.json');
 
   @override
   Future<List<Bike>> fetchBikes() async {
@@ -31,9 +29,7 @@ class BikeRepositoryFirebase implements BikeRepository {
 
   @override
   Future<Bike?> fetchBikeById(String id) async {
-    final Uri bikeUri = FirebaseConfig.baseUri.replace(
-      path: '/bikes/$id.json',
-    );
+    final Uri bikeUri = FirebaseConfig.baseUri.replace(path: '/bikes/$id.json');
 
     final http.Response response = await http.get(bikeUri);
 
@@ -45,6 +41,17 @@ class BikeRepositoryFirebase implements BikeRepository {
       return BikeDto.fromJson(id, body);
     } else {
       throw Exception('Failed to load bike $id');
+    }
+  }
+
+  @override
+  Future<void> bookBike(String bikeId, String stationId) async {
+    final Uri bikeUri = FirebaseConfig.baseUri.replace(path: '/bikes/$bikeId.json');
+
+    final response = await http.patch(bikeUri, headers: {'Content-Type': 'application/json'}, body: json.encode({'status': 'booked'}));
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to book bike $bikeId');
     }
   }
 }
