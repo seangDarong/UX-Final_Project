@@ -45,8 +45,6 @@ class BookingViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
-      await bikeRepository.bookBike(selectedBike.id, selectedStationId);
-
       bookingState.bookBike(selectedBike.id, selectedStationId);
 
       _isBookingConfirmed = true;

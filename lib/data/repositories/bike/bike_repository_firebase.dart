@@ -43,15 +43,4 @@ class BikeRepositoryFirebase implements BikeRepository {
       throw Exception('Failed to load bike $id');
     }
   }
-
-  @override
-  Future<void> bookBike(String bikeId, String stationId) async {
-    final Uri bikeUri = FirebaseConfig.baseUri.replace(path: '/bikes/$bikeId.json');
-
-    final response = await http.patch(bikeUri, headers: {'Content-Type': 'application/json'}, body: json.encode({'status': 'booked'}));
-
-    if (response.statusCode != 200) {
-      throw Exception('Failed to book bike $bikeId');
-    }
-  }
 }
