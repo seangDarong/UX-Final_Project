@@ -12,12 +12,8 @@ class StationDetailsViewModel extends ChangeNotifier {
   AsyncValue<Station> data = AsyncValue.loading();
 
   StationDetailsViewModel({required this.stationRepository, required this.bookingState, required this.stationId}) {
-    _init();
-    bookingState.addListener(_onBookingStateChanged);
-  }
-
-  void _init() {
     fetchStation();
+    bookingState.addListener(_onBookingStateChanged);
   }
 
   void _onBookingStateChanged() {
@@ -45,13 +41,18 @@ class StationDetailsViewModel extends ChangeNotifier {
     if (data.data == null) return [];
 
     return data.data!.slots.entries
-        .where((entry) => entry.value.bikeId != null && entry.value.status == 'available' && !bookingState.bookedBikeIds.contains(entry.value.bikeId))
+        .where((entry) => entry.value.bikeId != null && entry.value.status == 'available' && entry.value.bikeId != bookingState.bookedBikeId)
         .toList();
   }
 
   int getEmptySlots() {
     if (data.data == null) return 0;
-    return data.data!.capacity - data.data!.availableBikes;
+    return data.data!.capacity - getDisplayAvailableBikes();
+  }
+
+  int getDisplayAvailableBikes() {
+    if (data.data == null) return 0;
+    return getAvailableSlots().length;
   }
 
   @override

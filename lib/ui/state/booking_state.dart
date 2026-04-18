@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 
 class BookingState extends ChangeNotifier {
-  final Set<String> _bookedBikeIds = {};
+  String? _bookedBikeId;
+  String? _bookedStationId;
 
-  Set<String> get bookedBikeIds => _bookedBikeIds;
+  String? get bookedBikeId => _bookedBikeId;
+  String? get bookedStationId => _bookedStationId;
 
-  void addBookedBike(String bikeId) {
-    _bookedBikeIds.add(bikeId);
+  void bookBike(String bikeId, String stationId) {
+    _bookedBikeId = bikeId;
+    _bookedStationId = stationId;
+    notifyListeners();
+  }
+
+  void clearBookedBike() {
+    _bookedBikeId = null;
+    _bookedStationId = null;
     notifyListeners();
   }
 }
